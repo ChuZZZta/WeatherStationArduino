@@ -1,0 +1,114 @@
+body
+{
+	background-image: url("img/extra_clean_paper.png");
+	/*this pattern is downloaded from www.subtlepatterns.com*/
+	font-family: 'PT Sans', sans-serif;
+}
+a
+{
+	text-decoration: none;
+	color: #000000;
+}
+#site
+{
+	width: 1000px; 
+	margin-left: auto;  
+	margin-right: auto;
+	margin-top: 30px;
+	
+}
+.cb
+{
+	clear: both;	
+}
+#logo
+{
+	float: left;
+	margin-left:20px;
+	text-transform: uppercase;
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 3px;
+}
+#clock
+{
+	padding: 5px;
+	text-align: center;
+	font-size: 25px;
+	font-style: italic;
+}
+#dash
+{
+	margin-top: 20px;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 10px 20px 150px 15px;	
+}
+.title
+{
+	font-size: 25px;
+	text-align: center;
+	margin-top: 35px;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+#section1
+{
+	float: left;
+	margin-right: 20px;
+	width: 498px;
+	border-right: 2px dashed rgba(255, 0, 0, 0.25);
+}
+.squere
+{
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background-color: gray;
+	width: 214px;
+	height: 149px;
+	border-radius: 30px;
+	padding: 10px;
+	padding-top:65px;
+	font-size: 70px;
+	text-align: center;
+}
+#section2
+{
+	float: left;
+	width: 440px;
+}
+.rectangle
+{
+	width: 400px;
+	margin-bottom: 30px;
+	background-color: rgba(180, 180, 180, 0.75);
+	border: 3px dashed black;
+	text-align: center;
+	border-radius: 10px;
+	padding: 20px;
+	font-size: 23px;
+	margin-left: auto;  
+	margin-right: auto;
+}
+.rectangle:hover
+{
+	background-color: rgba(250, 250, 250, 0.4);
+}
+#footer
+{
+	margin-left: auto;  
+	margin-right: auto;
+	margin-top: 10px;
+	border-radius: 50px;
+	text-align: center;
+	padding: 5px;
+	font-style: italic;
+	font-size: 13px;
+	width:700px;
+	border: 1px dashed black;
+}
+#footer:hover
+{
+	background-color:rgba(50, 50, 50, 0.25);
+}
