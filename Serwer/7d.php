@@ -1,3 +1,37 @@
+<?php
+	$godz = '';
+	$temp = '';
+	$humi = '';
+	$press = '';
+	$rain = '';
+
+$conn = new mysqli(localhost, user1, password, arduino);
+$data = new DateTime();
+$data->sub(new DateInterval(P7D));
+$data = $data->format('Y-m-d H:m:s');
+$sql = "SELECT * FROM odczyty WHERE date >='$data'";
+$result = $conn->query($sql);
+while($row = $result->fetch_assoc()) 
+{
+	echo $row["id"]." ";
+	$godz=$godz.'"'.$row["date"].'",';
+	$temp=$temp.$row["temperature"].",";
+	$humi=$humi.$row["humidity"].",";
+	$press=$press.$row["pressure"].",";
+	if($row['rain']>700)
+	{
+		$rain=$rain."0,";
+	}else if($row['rain']>500)
+	{
+		$rain=$rain."1,";
+	}else{
+		$rain=$rain."2,";
+	}
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE HTML>
 
 <html lang="pl">
@@ -12,11 +46,11 @@
 		
 		<script src="skrypt.js"></script>
 		<script>
-			var godz = ["x", "2012-11-13 16:00:00", "2012-11-13 17:00:00", "2012-11-13 18:00:00", "2012-11-13 19:00:00", "2012-11-13 20:00:00", "2012-11-13 21:00:00", "2012-11-13 22:00:00", "2012-11-13 23:00:00", "2012-11-14 00:00:00", "2012-11-14 01:00:00", "2012-11-14 02:00:00", "2012-11-14 03:00:00", "2012-11-14 04:00:00", "2012-11-14 05:00:00", "2012-11-14 06:00:00", "2012-11-14 07:00:00", "2012-11-14 08:00:00", "2012-11-14 09:00:00", "2012-11-14 10:00:00", "2012-11-14 11:00:00", "2012-11-14 12:00:00", "2012-11-14 13:00:00", "2012-11-14 14:00:00", "2012-11-14 15:00:00"]
-			var temp = ["Temperatura",10,12,11,11,13,15,16,18,18,17,20,21,22,24,25,28,30,26,22,18,16,12,14,12];
-			var humi = ["Wilgotność",60,57,48,46,44,40,35,33,38,33,36,33,35,34,40,44,46,50,52,54,58,60,62,58];
-			var press = ["Ciśnienie",992,998,991,992,992,991,995,999,992,998,993,995,991,993,991,995,998,994,993,990,997,990,992,995];
-			var rain = ["Opady",0,0,0,0,0,0,1,2,2,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0];
+			var godz = ["x", <?php echo $godz; ?>]
+			var temp = ["Temperatura", <?php echo $temp; ?>];
+			var humi = ["Wilgotność", <?php echo $humi; ?>];
+			var press = ["Ciśnienie", <?php echo $press; ?>];
+			var rain = ["Opady", <?php echo $rain; ?>];
 		</script>
 		
 		<!-- Load D3.js -->
@@ -33,6 +67,7 @@
 			<div id="logo">Witaj w panelu stacji pogodowej</div><div id="clock"></div><div class="cb"></div>
 			
 			<div id="dash">
+			
 				<div class="title">Temperatura i wilgotność</div>
 				<div id="chart" style="width: 800px;margin-left: auto; margin-right: auto;"></div>
 				<div class="title">Ciśnienie</div>
@@ -40,7 +75,7 @@
 				<div class="title">Opady</div>
 				<div id="chart3" style="width: 800px;margin-left: auto; margin-right: auto;"></div>
 				<script src="24h.js"></script>
-				<a href=index.html><div class=rectangle>Powrót</div></a>
+				<a href=index.php><div class=rectangle>Powrót</div></a>
 				
 			</div>
 			<a href="https://github.com/ChuZZZta/WeatherStationArduino"><div id="footer">Strona stworzona przez Dominika Domka w ramach pracy licencjackiej. Kliknij aby przejść do serwisu github</div></a>
