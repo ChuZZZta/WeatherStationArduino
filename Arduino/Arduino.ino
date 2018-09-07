@@ -12,11 +12,12 @@ static byte myip[] = { 192,168,0,200 };
 byte Ethernet::buffer[500];
 BufferFiller bfill;
 
-int temperatura = 0;
-float cisnienie = 0.0;
-int wilgotnosc = 0;
-int opady = 0;
-float wysokosc = 0.0;
+// t - temperatura, c - cisnienie, w - wilgotnosc, o - opady, wys - wysokosc
+int t = 0;
+float c = 0.0;
+int w = 0;
+int o = 0;
+float wys = 0.0;
 
 byte temperature = 0;
 byte humidity = 0;
@@ -24,10 +25,9 @@ String json = "";
 
 void setup() 
 {
-  Serial.begin(9600);
   bmp.begin();
   if (ether.begin(sizeof Ethernet::buffer, mymac) == 0)
-    Serial.println(F("Failed to access Ethernet controller"));
+    Serial.println(F("Niepoprawnie podlaczony ethernet shield."));
   ether.staticSetup(myip);
 }
 
@@ -39,30 +39,24 @@ static word homePage() {
     "Pragma: no-cache\r\n"
     "\r\n"
     "{\"temp\" : \"$D\",\"press\":\"$D\",\"altit\":\"$D\",\"rain\":\"$D\",\"humidi\":\"$D\"}"),
-      temperatura,(int)cisnienie,(int)wysokosc,opady,wilgotnosc);
+      t,(int)c,(int)wys,o,w);
   return bfill.position();
 }
 
 void loop() 
 { 
-  temperatura = bmp.readTemperature();
-  cisnienie = bmp.readPressure()/100;
-  wysokosc = bmp.readAltitude();
-  opady = analogRead(A3);
+  t = bmp.readTemperature();
+  c = bmp.readPressure()/100;
+  wys = bmp.readAltitude();
+  o = analogRead(A3);
   dht11.read(pinDHT11, &temperature, &humidity, NULL);
 
-  wilgotnosc = (int)humidity;
-  temperatura = temperatura + (int)temperature;
-  temperatura = temperatura / 2;
-
-  //json="{\"temp\" : \""+String(temperatura)+"\",\"press\":\""+String(cisnienie)+"\",\"altit\":\""+String(wysokosc)+"\",\"rain\":\""+String(opady)+"\",\"humidi\":\""+String(wilgotnosc)+"\"}";
-  //Serial.println(json);
-  //delay(1000);
+  w = (int)humidity;
+  t = t + (int)temperature;
+  t = t / 2;
 
   word len = ether.packetReceive();
   word pos = ether.packetLoop(len);
   
-  if (pos)  // check if valid tcp data is received
-    ether.httpServerReply(homePage()); // send web page data
-  
+  if (pos) ether.httpServerReply(homePage()); 
 }

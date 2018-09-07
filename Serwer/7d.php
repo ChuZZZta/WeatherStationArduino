@@ -41,10 +41,10 @@ $conn->close();
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name=”author” content=”Dominik Domek” />
 		
-		<link rel="stylesheet" href="style.css" type="text/css" />	
+		<link rel="stylesheet" href="css/style.css" type="text/css" />	
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 		
-		<script src="skrypt.js"></script>
+		<script src="js/kafelki.js"></script>
 		<script>
 			var godz = ["x", <?php echo $godz; ?>]
 			var temp = ["Temperatura", <?php echo $temp; ?>];
@@ -56,8 +56,8 @@ $conn->close();
 		<!-- Load D3.js -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<!-- Load billboard.js with style -->
-		<script src="billboard.js"></script>
-		<link rel="stylesheet" href="billboard.css">
+		<script src="js/billboard.js"></script>
+		<link rel="stylesheet" href="css/billboard.css">
 		
 		<title>Arduino weather station</title>
 	</head>
@@ -74,7 +74,7 @@ $conn->close();
 				<div id="chart2" style="width: 800px;margin-left: auto; margin-right: auto;"></div>
 				<div class="title">Opady</div>
 				<div id="chart3" style="width: 800px;margin-left: auto; margin-right: auto;"></div>
-				<script src="24h.js"></script>
+				<script src="js/wykresy.js"></script>
 				<a href=index.php><div class=rectangle>Powrót</div></a>
 				
 			</div>

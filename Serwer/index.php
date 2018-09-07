@@ -26,11 +26,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name=”author” content=”Dominik Domek” />
 		
-		<link rel="stylesheet" href="style.css" type="text/css" />	
+		<link rel="stylesheet" href="css/style.css" type="text/css" />	
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 		
 		<script>var odczyt = [<?php echo $js; ?>];</script>
-		<script src="skrypt.js"></script>
+		<script src="js/kafelki.js"></script>
 
 		<title>Arduino weather station</title>
 	</head>
